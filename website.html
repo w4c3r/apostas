@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>apostas fictícias</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+<h1>calcule suas apostas aqui</h1>
+<p>apenas insira o valor</p>
+<img src="C:\Users\Ayrton\Desktop\cover8.jpg" width="300" />
+<py-script>
+import math
+def função(x):
+    return (math.pow((x-1/x), 0.25))*x
+x = float(input("valor da aposta: "))
+print(format(função(x), ".2f"))
+print("para usar novamente, recarregue a página")
+</py-script>
+</body>
+</html>
