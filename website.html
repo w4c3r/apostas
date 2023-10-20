@@ -1,43 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>apostas fictícias</title>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatibile" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculador de Apostas</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .imagem-topo {
+      width: 400px;
+      margin: 0 auto;
+    }
+
+    .container {
+      width: 400px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    button {
+      width: 100%;
+      height: 40px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .resultado {
+      font-size: 20px;
+      color: #000;
+    }
+
+    .devolução {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-<h1>calcule suas apostas aqui</h1>
-<p>apenas insira o valor</p>
-<img src="https://i.kym-cdn.com/entries/icons/facebook/000/043/391/cover8.jpg" width="300" />
-<h3>esse site é uma bosta presta atenção:</h3>
-    <div><p>vai aparecer uma aba pedindo um valor, aí tu coloca<br>um valor numerico, aí vai aparecer a mesma aba novamente<br>e tu vai colocando os valores que tu quer usar. se tu não<br>quer mais colocar valor, tu n coloca nada na aba e aperta ENTER.</p></div>
-    <div><h4>NÚMERO QUEBRADO TEM Q TER VÍRGULA OU PONTO:<br>12.4<br>3,14<br>(n tem pq ter mais de duas casas decimais)</h4></div>
-    <py-script>
-import math
-lista = []
-lista2 = []
-def função(x):
-    return (math.pow((x-1/x), 0.25))*x
-def main():
-    while True:
-        x = input()
-        x = x.replace(",", ".")
-        if x == "":
-            if lista == []:
-                print("nenhum valor calculado")
-                print("para usar novamente, recarregue a página")
-            else:
-                print("teus valor aí:\nVALOR DEVOLVIDO ", lista)
-                print("VALOR DE APOSTA ", lista2)
-                print("para usar novamente, recarregue a página")
-            break
-        else:
-            lista.append(float(format(função(float(x)), ".2f")))
-            lista2.append(float(x))
+  <main>
+    <img src="https://i.kym-cdn.com/entries/icons/facebook/000/043/391/cover8.jpg" style="display: block; margin: 0 auto;" width=400 class="imagem-topo" />
+    <div class="container">
+      <h1>Calculador de Apostas</h1>
 
-if __name__ == "__main__":
-    main()
-</py-script>
+      <div class="input-container">
+        <input type="number" placeholder="R$ *" id="valor-em-reais">
+        <input type="text" placeholder="(Opcional)" id="nome-ou-termo" />
+        <input type="text" placeholder="(Opcional)" id="descricao" />
+        <button type="button" id="calcular">Calcular</button>
+      </div>
+
+      <div class="resultado">
+        <ul id="resultados"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const valorEmReais = document.querySelector("#valor-em-reais");
+    const calcular = document.querySelector("#calcular");
+    const resultados = document.querySelector("#resultados");
+
+    calcular.addEventListener("click", () => {
+      const valor = parseFloat(valorEmReais.value);
+
+      // Aqui, você pode usar o valor como uma variável reutilizável
+
+      const resultadoCalculo = valor * (valor - 1 / valor) ** 0.25;
+
+      // Verifica se as caixas de texto foram preenchidas
+      const nomeOuTermo = document.querySelector("#nome-ou-termo").value;
+      const descricao = document.querySelector("#descricao").value;
+
+      // Cria um novo item para a lista de resultados
+      const itemResultado = document.createElement("li");
+      itemResultado.textContent = `
+        + R$ ${resultadoCalculo.toFixed(2)} - R$ ${valor} ${nomeOuTermo} ${descricao}
+      `;
+
+      // Adiciona o novo item à lista de resultados
+      resultados.appendChild(itemResultado);
+    });
+  </script>
 </body>
 </html>
