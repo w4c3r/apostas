@@ -10,15 +10,34 @@
 <h1>calcule suas apostas aqui</h1>
 <p>apenas insira o valor</p>
 <img src="https://i.kym-cdn.com/entries/icons/facebook/000/043/391/cover8.jpg" width="300" />
-<h3>esse site é uma bosta, tu precisa COLOCAR O VALOR APOSTADO na aba que pede</h3>
-<h3>depois tu envia e se quiser refazer o processo precisa recarregar a página 👌</h3>
-<py-script>
+<h3>esse site é uma bosta presta atenção:</h3>
+    <div><p>vai aparecer uma aba pedindo um valor, aí tu coloca<br>um valor numerico, aí vai aparecer a mesma aba novamente<br>e tu vai colocando os valores que tu quer usar. se tu não<br>quer mais colocar valor, tu n coloca nada na aba e aperta ENTER.</p></div>
+    <div><h4>NÚMERO QUEBRADO TEM Q TER VÍRGULA OU PONTO:<br>12.4<br>3,14<br>(n tem pq ter mais de duas casas decimais)</h4></div>
+    <py-script>
 import math
+lista = []
+lista2 = []
 def função(x):
     return (math.pow((x-1/x), 0.25))*x
-x = float(input("valor da aposta: "))
-print(format(função(x), ".2f"))
-print("para usar novamente, recarregue a página")
+def main():
+    while True:
+        x = input()
+        x = x.replace(",", ".")
+        if x == "":
+            if lista == []:
+                print("nenhum valor calculado")
+                print("para usar novamente, recarregue a página")
+            else:
+                print("teus valor aí:\nVALOR DEVOLVIDO ", lista)
+                print("VALOR DE APOSTA ", lista2)
+                print("para usar novamente, recarregue a página")
+            break
+        else:
+            lista.append(float(format(função(float(x)), ".2f")))
+            lista2.append(float(x))
+
+if __name__ == "__main__":
+    main()
 </py-script>
 </body>
 </html>
